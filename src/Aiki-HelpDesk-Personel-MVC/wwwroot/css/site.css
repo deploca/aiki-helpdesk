@@ -1,0 +1,155 @@
+﻿* {
+    font-family: IRANSans !important;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: fixed center no-repeat;
+    background-size: cover;
+    background-image: url('../Image/ferdinand-stohr-RNx36we97kg-unsplash.jpg');
+    background-size: 100% 100%;
+}
+
+.helpinfo {
+    color: #850b0b !important;
+    height:100% !important;
+}
+.textInputColor {
+    color:black !important;
+}
+
+::-webkit-input-placeholder {
+    color: #c7c5c5 !important;
+    direction: rtl !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    color: #c7c5c5 !important;
+    direction: rtl !important;
+    text-align: right;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+    color: #c7c5c5 !important;
+    direction: rtl !important;
+    text-align: right;
+}
+
+:-ms-input-placeholder {
+    color: #c7c5c5 !important;
+    direction: rtl !important;
+}
+.menu {
+    color: #0026ff !important;
+}
+
+.ltr{
+    direction:ltr !important;
+}
+.special-footer {
+    width: 100% !important;
+    opacity: 0.9;
+    border-radius: 5px;
+    position: absolute;
+    right: 0;
+    bottom:4px;
+}
+
+.refreshcaptcha::before {
+    content: "\21bb";
+    font-size: 30px !important;
+    font-family: Lucida Sans Unicode;
+    color: red;
+    
+}
+
+.refreshcaptcha:hover{
+    text-decoration:none !important;
+}
+
+.btnStyle {
+    background-color: #3d65cb !important;
+    color: white !important;
+}
+
+mark {
+    background-color: #fadb7f !important;
+    border-radius: 5px;
+    color:#850b0b;
+}
+
+ol li:first-of-type {
+    list-style: none !important;
+    margin-right: -1em;
+}
+
+ol li {
+    list-style:outside;
+    line-height:30px;
+}
+.cardop {
+    background-color: rgba(255,255,255,0.33) !important;
+}
+.helpop {
+    background-color: rgba(248, 248, 248, 0.20) !important;
+}
+
+.searchcard {
+    background-color: rgba(248, 248, 248, 0.95) !important;
+}
+.trackCSS {
+    background-color: rgba(248, 248, 248, 0.95) !important;
+}
+
+.developer-info {
+    background-color: rgba(248, 248, 248, 0.63) !important;
+    border-radius:5px;
+}
+
+#sitefooter {
+    width:100%;
+    background-color: rgba(248, 248, 248, 0.63) !important;
+    border-radius: 5px;
+    padding-bottom:5px;
+    margin-top:5px;
+    color:#850b0b !important;
+}
+
+textarea{
+    resize:none;
+}
+
+.btn-custom{
+    border-width:0;
+    outline:none;
+    background-color:transparent;
+    color:dodgerblue;
+}
+
+
+.btn-custom:hover {
+    border-width: 0;
+    outline: none;
+    border-radius: 7px;
+    background-color: #c2e1c9;
+    color: dodgerblue;
+    transition: background-color .3s;
+   
+}
+
+#searchGrid > .btn-group-sm > .btn, .btn-sm {
+    line-height: 0.75 ;
+    padding: 0 ;
+}
+
+#searchGrid > .table td, .table th {
+    padding: .5rem;
+}
+
+.btn-link {
+    text-decoration: none !important;
+}

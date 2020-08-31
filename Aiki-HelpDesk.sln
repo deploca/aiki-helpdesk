@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIKI.CO.HelpDesk.WebAPI", "src\Aiki-HelpDesk-Admin-WebAPI\AIKI.CO.HelpDesk.WebAPI.csproj", "{62B14E61-3811-45C6-AC75-2C386F24E282}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurbineJobMVC", "src\Aiki-HelpDesk-Personel-MVC\TurbineJobMVC.csproj", "{9A7FD82D-2FB8-4E6A-9767-5AF3E138D312}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Aiki-HelpDesk-Admin-UI", "src\Aiki-HelpDesk-Admin-UI\", "{E92CB4BC-5491-496F-9B68-ED36F85219AE}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_64028"
+		Debug.AspNetCompiler.PhysicalPath = "src\Aiki-HelpDesk-Admin-UI\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64028\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_64028"
+		Release.AspNetCompiler.PhysicalPath = "src\Aiki-HelpDesk-Admin-UI\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64028\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "64028"
+		SlnRelativePath = "src\Aiki-HelpDesk-Admin-UI\"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Admin Panel", "Admin Panel", "{256864B3-68BE-47FE-89E8-F0CB2ED0745D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Personel Panel", "Personel Panel", "{39EBD0EC-4379-4658-84DC-D3695232D02B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E85EE8C9-A155-4B5E-BAD0-C1E15CCCF797}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{62B14E61-3811-45C6-AC75-2C386F24E282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62B14E61-3811-45C6-AC75-2C386F24E282}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62B14E61-3811-45C6-AC75-2C386F24E282}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62B14E61-3811-45C6-AC75-2C386F24E282}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A7FD82D-2FB8-4E6A-9767-5AF3E138D312}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A7FD82D-2FB8-4E6A-9767-5AF3E138D312}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A7FD82D-2FB8-4E6A-9767-5AF3E138D312}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A7FD82D-2FB8-4E6A-9767-5AF3E138D312}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E92CB4BC-5491-496F-9B68-ED36F85219AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E92CB4BC-5491-496F-9B68-ED36F85219AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E92CB4BC-5491-496F-9B68-ED36F85219AE}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{E92CB4BC-5491-496F-9B68-ED36F85219AE}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{62B14E61-3811-45C6-AC75-2C386F24E282} = {256864B3-68BE-47FE-89E8-F0CB2ED0745D}
+		{9A7FD82D-2FB8-4E6A-9767-5AF3E138D312} = {39EBD0EC-4379-4658-84DC-D3695232D02B}
+		{E92CB4BC-5491-496F-9B68-ED36F85219AE} = {256864B3-68BE-47FE-89E8-F0CB2ED0745D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6E4B677F-3BDB-4C69-9B53-B8D82F65E0AB}
+	EndGlobalSection
+EndGlobal

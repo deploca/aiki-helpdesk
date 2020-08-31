@@ -1,0 +1,53 @@
+[
+  {
+    "outputFileName": "wwwroot/lib/shabnam-font/dist/font-face.min.css",
+    "inputFiles": [
+      "wwwroot/lib/shabnam-font/dist/font-face.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "wwwroot/lib/bootstrap-v4-rtl/dist/css/bootstrap-rtl.min.css",
+      "wwwroot/css/fontiran.css",
+      "wwwroot/lib/fontawesome-pro-5.12.0-web/css/solid.min.css",
+      "wwwroot/css/site.css",
+      "wwwroot/css/TimeLine.min.css",
+      "wwwroot/lib/toastr/build/toastr.min.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/validation.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js",
+      "wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/fontawesome.min.js",
+    "inputFiles": [
+      "wwwroot/lib/fontawesome-pro-5.12.0-web/js/fontawesome.min.js",
+      "wwwroot/lib/fontawesome-pro-5.12.0-web/js/solid.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/TimeLine.min.css",
+    "inputFiles": [
+      "wwwroot/css/TimeLine.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/validatorFunctions.min.js",
+    "inputFiles": [
+      "wwwroot/js/validatorFunctions.js"
+    ]
+  }
+]

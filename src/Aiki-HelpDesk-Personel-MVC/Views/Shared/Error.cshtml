@@ -1,0 +1,17 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+<div class="developer-info">
+    <div class="alert alert-danger">
+        @if (Model.ShowRequestId)
+        {
+            <p>
+                <strong>شناسه درخواست:</strong> <code>@Model.RequestId</code>
+            </p>
+        }
+        <hr/>
+        <h2>هنگام بررسی درخواست شما یک خطا رخ داده است.</h2>
+        <h4>لطفا از صحت اطلاعات خود جهت ثبت درخواست کار جدید و یا جستجو اطمینان حاصل نمایید</h4>
+    </div>
+</div>
