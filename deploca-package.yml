@@ -1,0 +1,13 @@
+version: '1.0'
+
+services:
+    database:
+        image: postgres:12.2-alpine
+    webapi:
+        source: webapi
+        dockerfile: Dockerfile.Production
+        external: yes
+    admin-ui:
+        source: admin-ui
+        external: yes
+        root_url: yes

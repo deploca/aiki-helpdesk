@@ -341,3 +341,6 @@ healthchecksdb
 
 # libs folder of mvc
 **/wwwroot/lib/*
+
+# published files
+/_publish

@@ -48,9 +48,9 @@
                                                         dir="ltr"
                                                 ></v-text-field>
                                             </ValidationProvider>
-                                            <div style="text-align: center" v-if="$store.state.isOnline">
+                                            <div style="text-align: center" v-if="$store.state.isOnline && 0">
                                                 <vue-hcaptcha
-                                                        sitekey="e3605ee2-18a4-4e7c-9a8e-5885075be08e"
+                                                        sitekey="655600ea-464e-4484-b803-ca6c53374197"
                                                         @verify="captchaVerified"
                                                         @error="hCaptchaVerified=false">
                                                 </vue-hcaptcha>
@@ -115,7 +115,7 @@
                     email: ""
                 },
                 submitStatus: null,
-                hCaptchaVerified: false
+                hCaptchaVerified: true
             };
         },
         components: {

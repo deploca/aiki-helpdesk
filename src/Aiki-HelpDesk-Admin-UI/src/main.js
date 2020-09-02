@@ -24,8 +24,7 @@ import "vue-toastification/dist/index.css";
 import VueNativeNotification from 'vue-native-notification'
 import Splash from 'vue-splash';
 
-//axois.defaults.baseURL = "https://localhost:5001/";
-axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/";
+axois.defaults.baseURL = process.env.NODE_ENV == 'development' ? '/api' : '//webapi_' + window.location.host;
 axois.defaults.headers.common["Content-Type"] = "application/json";
 axois.defaults.headers.common.Authorization = "Bearer " + store.state.accessToken;
 axois.defaults.headers.common.CompanyID = store.state.companyId;

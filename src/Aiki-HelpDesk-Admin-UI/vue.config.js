@@ -1,6 +1,7 @@
 'use strict'
 
 module.exports = {
+    outputDir: '../../_publish/admin-ui',
     "transpileDependencies": [
         "vuetify"
     ],
@@ -12,7 +13,7 @@ module.exports = {
         port:5002,
         proxy: {
             '/api': {
-                target: 'https://aiki-ticket-app.herokuapp.com',
+                target: 'http://localhost:28152/',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': ''
