@@ -57,11 +57,12 @@ namespace AIKI.CO.HelpDesk.WebAPI.Models
             _encryptionIV =
                 Encoding.Unicode.GetBytes(Environment.GetEnvironmentVariable("encryptionIV") ?? string.Empty);
             _context = context;
-            _appSettings = appSettings.Value;
-            _protector = provider.CreateProtector("MemberService.CompanyId");
+            _appSettings = appSettings?.Value;
+            _protector = provider?.CreateProtector("MemberService.CompanyId");
             _provider = new AesProvider(_encryptionKey, _encryptionIV);
 
-            if (_context.HttpContext.Request.Headers["CompanyID"].Any())
+            if (_context != null && _context.HttpContext != null && 
+                _context.HttpContext.Request.Headers["CompanyID"].Any())
                 _companyid =
                     Guid.Parse(_protector.Unprotect(_context.HttpContext.Request.Headers["CompanyID"].ToString()));
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;

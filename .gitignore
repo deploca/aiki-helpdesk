@@ -220,7 +220,6 @@ ClientBin/
 *.dbmdl
 *.dbproj.schemaview
 *.jfm
-*.pfx
 *.publishsettings
 orleans.codegen.cs
 
@@ -341,3 +340,6 @@ healthchecksdb
 
 # libs folder of mvc
 **/wwwroot/lib/*
+
+# published files
+/_publish

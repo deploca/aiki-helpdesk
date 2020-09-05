@@ -40,38 +40,53 @@ namespace AIKI.CO.HelpDesk.WebAPI
     {
         private static X509Certificate2 logServerCertificate;
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment hostingEnv)
         {
             Configuration = configuration;
+            HostingEnvironment = hostingEnv;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment HostingEnvironment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var builder = new PostgreSqlConnectionStringBuilder(Configuration["DATABASE_URL"])
+            services.AddDbContext<dbContext>(options =>
             {
-                Pooling = true,
-                TrustServerCertificate = true,
-                SslMode = SslMode.Require
-            };
+                var dbUrl = "postgres://{0}:{1}@{2}:5432/aiki-helpdesk";
+                if (HostingEnvironment.IsDevelopment())
+                    dbUrl = string.Format(dbUrl, "postgres", "123456", "localhost");
+                else
+                    dbUrl = string.Format(dbUrl, "postgres", "", "database");
 
-            services.AddDbContext<dbContext>(options => { options.UseNpgsql(builder.ConnectionString); })
-                .AddUnitOfWork<dbContext>();
+                var builder = new PostgreSqlConnectionStringBuilder(dbUrl)
+                {
+                    Pooling = true,
+                    TrustServerCertificate = true,
+                    SslMode = SslMode.Disable
+                };
+                options.UseNpgsql(builder.ConnectionString);
+            }).AddUnitOfWork<dbContext>();
 
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(policy =>
                 {
-                    policy
-                        .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .WithOrigins(
-                            "https://aiki-helpdesk-v1.firebaseapp.com",
+                    string[] origins;
+                    if (HostingEnvironment.IsDevelopment())
+                        origins = new string[] {
                             "https://localhost:5001",
                             "https://localhost:5002",
                             "http://localhost:5002",
-                            "http://localhost:8080")
+                            "http://localhost:8080" };
+                    else
+                        origins = new string[] {
+                            "https://" + Environment.GetEnvironmentVariable("DEPLOCA_SERVICEURL_admin-ui") };
+
+                    policy
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithOrigins(origins)
                         .AllowCredentials();
                 });
             });
@@ -118,8 +133,8 @@ namespace AIKI.CO.HelpDesk.WebAPI
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
-            else app.UseHsts();
+            if (env.IsDevelopment())
+                app.UseDeveloperExceptionPage();
 
             Serilog.Debugging.SelfLog.Enable(msg => Debug.WriteLine(msg));
             Serilog.Debugging.SelfLog.Enable(Console.Error);
@@ -143,7 +158,6 @@ namespace AIKI.CO.HelpDesk.WebAPI
             loggerFactory.AddSerilog();
             Log.Information("Startup");
 
-            app.UseHttpsRedirection();
             app.UseResponseCompression();
             app.UseResponseCaching();
             app.UseCors();
@@ -153,17 +167,21 @@ namespace AIKI.CO.HelpDesk.WebAPI
             app.UseSerilogRequestLogging();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers(); 
+                endpoints.MapControllers();
                 endpoints.MapHub<TicketAlarmHub>("/ticketalarmhub", options =>
                 {
                 });
             });
-            app.UseSwagger();
-            app.UseSwaggerUI(options =>
+
+            if (env.IsDevelopment())
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "AIKI Help Desk API");
-                options.RoutePrefix = string.Empty;
-            });
+                app.UseSwagger();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "AIKI Help Desk API");
+                    options.RoutePrefix = string.Empty;
+                });
+            }
         }
 
         private static IDocumentStore CreateRavenDocStore(IWebHostEnvironment env)
@@ -179,7 +197,7 @@ namespace AIKI.CO.HelpDesk.WebAPI
                         "Mveyma6303$");
             var docStore = new DocumentStore
             {
-                Urls = new[] {"https://a.free.aiki.ravendb.cloud"},
+                Urls = new[] { "https://a.free.aiki.ravendb.cloud" },
                 Database = "HelpDeskLog",
                 Certificate = logServerCertificate
             };

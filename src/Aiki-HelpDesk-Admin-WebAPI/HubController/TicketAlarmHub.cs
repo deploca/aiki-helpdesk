@@ -66,7 +66,7 @@ namespace AIKI.CO.HelpDesk.WebAPI.HubController
             {
                 Pooling = true,
                 TrustServerCertificate = true,
-                SslMode = BuilderExtensions.SslMode.Require
+                SslMode = BuilderExtensions.SslMode.Disable
             };
             return builder.ConnectionString;
         }
