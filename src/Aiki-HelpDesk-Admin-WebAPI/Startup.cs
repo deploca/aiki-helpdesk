@@ -53,35 +53,40 @@ namespace AIKI.CO.HelpDesk.WebAPI
         {
             services.AddDbContext<dbContext>(options =>
             {
+                var dbUrl = "postgres://{0}:{1}@{2}:5432/aiki-helpdesk";
                 if (HostingEnvironment.IsDevelopment())
-                {
-                    var builder = new PostgreSqlConnectionStringBuilder(Configuration["DATABASE_URL"])
-                    {
-                        Pooling = true,
-                        TrustServerCertificate = true,
-                        SslMode = SslMode.Disable
-                    };
-                    options.UseNpgsql(builder.ConnectionString);
-                }
+                    dbUrl = string.Format(dbUrl, "postgres", "123456", "localhost");
                 else
+                    dbUrl = string.Format(dbUrl, "postgres", "", "database");
+
+                var builder = new PostgreSqlConnectionStringBuilder(dbUrl)
                 {
-                    options.UseInMemoryDatabase("aiki-helpdesk");
-                }
+                    Pooling = true,
+                    TrustServerCertificate = true,
+                    SslMode = SslMode.Disable
+                };
+                options.UseNpgsql(builder.ConnectionString);
             }).AddUnitOfWork<dbContext>();
 
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(policy =>
                 {
-                    policy
-                        .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .WithOrigins(
-                            "https://aiki-helpdesk-v1.firebaseapp.com",
+                    string[] origins;
+                    if (HostingEnvironment.IsDevelopment())
+                        origins = new string[] {
                             "https://localhost:5001",
                             "https://localhost:5002",
                             "http://localhost:5002",
-                            "http://localhost:8080")
+                            "http://localhost:8080" };
+                    else
+                        origins = new string[] {
+                            "https://" + Environment.GetEnvironmentVariable("DEPLOCA_SERVICEURL_admin-ui") };
+
+                    policy
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithOrigins(origins)
                         .AllowCredentials();
                 });
             });
@@ -124,12 +129,6 @@ namespace AIKI.CO.HelpDesk.WebAPI
                     x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddSignalR();
             services.AddMemoryCache();
-
-            // serve client and server together in production
-            services.AddSpaStaticFiles(o =>
-            {
-                o.RootPath = "wwwroot";
-            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
@@ -173,16 +172,6 @@ namespace AIKI.CO.HelpDesk.WebAPI
                 {
                 });
             });
-
-            // serve client and server together in production
-            if (env.IsProduction())
-            {
-                app.UseSpaStaticFiles();
-                app.UseSpa(o =>
-                {
-                    o.Options.SourcePath = "wwwroot";
-                });
-            }
 
             if (env.IsDevelopment())
             {

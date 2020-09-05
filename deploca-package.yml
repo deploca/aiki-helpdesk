@@ -3,10 +3,21 @@ version: '1.0'
 services:
     database:
         image: postgres:12.2-alpine
+        environment:
+            POSTGRES_HOST_AUTH_METHOD: trust
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: ""
     webapi:
         source: webapi
         dockerfile: Dockerfile.Production
         external: yes
+        environment:
+            encryptionIV: CC60C078
+            encryptionKey: 1jMvxuyWlkYyd4tT
+            SmtpPassword: Ys21tJOLj8MvrEnV
+            cert_password: Mveyma6303$
+            jwt_encryptionKey: 16CharEncryptKey
+            jwt_secret: PDv7DrqznYL6nv7DrqzjnQYO9JxIsWdcjnQYL6nu0f
     admin-ui:
         source: admin-ui
         external: yes
