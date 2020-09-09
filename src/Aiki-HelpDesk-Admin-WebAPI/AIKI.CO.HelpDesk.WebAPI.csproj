@@ -46,7 +46,7 @@
 
   <ItemGroup>
     <Reference Include="Microsoft.EntityFrameworkCore.UnitOfWork">
-      <HintPath>..\..\..\..\..\Test Projects\Nuget\Microsoft.EntityFrameworkCore.UnitOfWork.dll</HintPath>
+      <HintPath>..\..\lib\Microsoft.EntityFrameworkCore.UnitOfWork.dll</HintPath>
       <Private>true</Private>
     </Reference>
   </ItemGroup>
