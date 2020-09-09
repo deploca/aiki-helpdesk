@@ -58,16 +58,20 @@ namespace AIKI.CO.HelpDesk.WebAPI
                         // seed
                     }
                 }
-                catch (System.Net.Sockets.SocketException)
+                catch (Npgsql.NpgsqlException npgex)
                 {
-                    // wait a moment for next try
-                    var logger = scope.ServiceProvider.GetRequiredService<Serilog.ILogger>();
-                    logger.Warning("Database service is not running yet. Trying to connect again ...");
-                    System.Threading.Thread.Sleep(1000);
+                    if (npgex.InnerException != null && 
+                        npgex.InnerException is System.Net.Sockets.SocketException)
+                    {
+                        // wait a moment for next try
+                        var logger = scope.ServiceProvider.GetRequiredService<Serilog.ILogger>();
+                        logger.Warning("Database service is not running yet. Trying to connect again ...");
+                        System.Threading.Thread.Sleep(1000);
+                    }
+                    else throw;
                 }
-                catch (Exception ex)
+                catch
                 {
-                    //Log errors or do anything you think it's needed
                     throw;
                 }
             }
