@@ -25,7 +25,7 @@ jobs:
         with:
           path: _publish
           target: aiki-helpdesk/development
-          token: ${{ github.secrets.AIKI_TEAM_DEPLOCA_API_KEY }}
+          token: ${{ secrets.AIKI_TEAM_DEPLOCA_API_KEY }}
       # Use the output from the `hello` step
       - name: Get the output result
         run: echo "The result is ${{ steps.uploader.outputs.result }}"
