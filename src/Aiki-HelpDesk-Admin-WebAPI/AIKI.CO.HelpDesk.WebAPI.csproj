@@ -24,7 +24,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.UnitOfWork" Version="3.1.16" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
@@ -43,6 +42,13 @@
     <Folder Include="CustomMiddleware\" />
     <Folder Include="DataProtectionKeys" />
     <Folder Include="Models\CustomValidation\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.EntityFrameworkCore.UnitOfWork">
+      <HintPath>..\..\..\..\..\Test Projects\Nuget\Microsoft.EntityFrameworkCore.UnitOfWork.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
