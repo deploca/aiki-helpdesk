@@ -40,39 +40,35 @@ namespace AIKI.CO.HelpDesk.WebAPI
 
         public static void MigrateDatabase(IHost host)
         {
-            using (var scope = host.Services.CreateScope())
+            using var scope = host.Services.CreateScope();
+            var databaseIsUp = false;
+            while (!databaseIsUp)
             {
-                using (var dbContext = scope.ServiceProvider.GetRequiredService<Models.dbContext>())
+                try
                 {
-                    var databaseIsUp = false;
-                    while (!databaseIsUp)
+                    using var dbContext = scope.ServiceProvider.GetRequiredService<Models.dbContext>();
+                    var isFirstRun = dbContext.Database.CanConnect() == false;
+                    databaseIsUp = true;
+
+                    // migrate database
+                    dbContext.Database.Migrate();
+
+                    if (isFirstRun)
                     {
-                        try
-                        {
-                            var isFirstRun = dbContext.Database.CanConnect() == false;
-                            databaseIsUp = true;
-
-                            // migrate database
-                            dbContext.Database.Migrate();
-
-                            if (isFirstRun)
-                            {
-                                // seed
-                            }
-                        }
-                        catch (System.Net.Sockets.SocketException)
-                        {
-                            // wait a moment for next try
-                            var logger = scope.ServiceProvider.GetRequiredService<Serilog.ILogger>();
-                            logger.Warning("Database service is not running yet. Trying to connect again ...");
-                            System.Threading.Thread.Sleep(1000);
-                        }
-                        catch (Exception ex)
-                        {
-                            //Log errors or do anything you think it's needed
-                            throw;
-                        }
+                        // seed
                     }
+                }
+                catch (System.Net.Sockets.SocketException)
+                {
+                    // wait a moment for next try
+                    var logger = scope.ServiceProvider.GetRequiredService<Serilog.ILogger>();
+                    logger.Warning("Database service is not running yet. Trying to connect again ...");
+                    System.Threading.Thread.Sleep(1000);
+                }
+                catch (Exception ex)
+                {
+                    //Log errors or do anything you think it's needed
+                    throw;
                 }
             }
         }
