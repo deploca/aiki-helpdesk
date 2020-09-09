@@ -41,17 +41,18 @@ namespace AIKI.CO.HelpDesk.WebAPI
         public static void MigrateDatabase(IHost host)
         {
             using var scope = host.Services.CreateScope();
+            using var dbContext = scope.ServiceProvider.GetRequiredService<Models.dbContext>();
             var databaseIsUp = false;
             while (!databaseIsUp)
             {
                 try
                 {
-                    using var dbContext = scope.ServiceProvider.GetRequiredService<Models.dbContext>();
                     var isFirstRun = dbContext.Database.CanConnect() == false;
                     databaseIsUp = true;
 
                     // migrate database
                     dbContext.Database.Migrate();
+                    Console.WriteLine("[DATABASE] Migration(s) were applied.");
 
                     if (isFirstRun)
                     {
@@ -60,12 +61,11 @@ namespace AIKI.CO.HelpDesk.WebAPI
                 }
                 catch (Npgsql.NpgsqlException npgex)
                 {
-                    if (npgex.InnerException != null && 
-                        npgex.InnerException is System.Net.Sockets.SocketException)
+                    if ((npgex.InnerException != null && npgex.InnerException is System.Net.Sockets.SocketException) ||
+                        (!string.IsNullOrWhiteSpace(npgex.Message) && npgex.Message.StartsWith("57P03")))
                     {
                         // wait a moment for next try
-                        var logger = scope.ServiceProvider.GetRequiredService<Serilog.ILogger>();
-                        logger.Warning("Database service is not running yet. Trying to connect again ...");
+                        Console.WriteLine("[DATABASE] Database service is not running yet. Trying to connect again ...");
                         System.Threading.Thread.Sleep(1000);
                     }
                     else throw;
