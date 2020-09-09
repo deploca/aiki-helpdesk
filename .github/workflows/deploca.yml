@@ -20,7 +20,7 @@ jobs:
           chmod +x publish.sh
           ./publish.sh
       - name: Upload to deploca
-        uses: deploca/deploca-upload-action@0.1.0
+        uses: deploca/deploca-upload-action@0.1.1
         id: uploader
         with:
           path: _publish
