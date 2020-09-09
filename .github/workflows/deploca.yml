@@ -1,0 +1,31 @@
+on:
+  push:
+    branches:
+      - master
+      - move_to_new_deploca
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    name: Build projects and deploy them to deploca.com
+    steps:
+      - name: Checkout Action
+        uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1.5.0
+        with:
+          dotnet-version: 3.1.x
+      - name: Build projects
+        run: |
+          chmod +x publish.sh
+          ./publish.sh
+      - name: Upload to deploca
+        uses: deploca/deploca-upload-action@0.1.1
+        id: uploader
+        with:
+          path: _publish
+          target: aiki-helpdesk/development
+          token: ${{ secrets.AIKI_TEAM_DEPLOCA_API_KEY }}
+      # Use the output from the `hello` step
+      - name: Get the output result
+        run: echo "The result is ${{ steps.uploader.outputs.result }}"
