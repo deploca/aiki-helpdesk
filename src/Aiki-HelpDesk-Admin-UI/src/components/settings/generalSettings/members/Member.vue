@@ -31,6 +31,7 @@
                   <validation-provider
                       v-slot="{ errors }"
                       name="کلمه عبور"
+                      :rules="$route.params.formType === 'Insert' ? 'required':''"
                       immediate
                   >
                     <v-text-field
@@ -127,7 +128,7 @@ extend("required", {
 });
 extend("email", {
   ...email,
-  message: "{_field_} آدرس معتبری نمی باشد"
+  message: "{_field_} معتبر نمی باشد"
 });
 extend("regex", {
   ...regex,
