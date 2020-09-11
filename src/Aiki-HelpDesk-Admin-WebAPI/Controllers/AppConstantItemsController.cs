@@ -42,12 +42,13 @@ namespace AIKI.CO.HelpDesk.WebAPI.Controllers
 
         [Authorize(Roles = "admin, backupuser")]
         [HttpGet("GetByParentId/{id:guid}")]
-        public async Task<IActionResult> GetByParentId([FromRoute]Guid id)
+        public async Task<IActionResult> GetByParentId([FromRoute] Guid id)
         {
-            var result = await _service.GetAll(q => q.appconstantid == id);
+            var result = await _service.GetAll(q => q.appconstantid == id,
+                orderBy: q => q.OrderBy(c => c.value1).ThenBy(c => c.value2));
             if (result != null)
                 return Ok(result);
-            else return NotFound();
+            return NotFound();
         }
         
         [HttpPost]
