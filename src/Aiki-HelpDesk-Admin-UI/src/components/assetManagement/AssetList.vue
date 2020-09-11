@@ -64,10 +64,10 @@
                     {{ item.assettypeid }}
                   </td>
                   <td class="text-center">
-                    {{ item.assetlocationid }}
+                    {{item.assetlocationid}}
                   </td>
                   <td>
-                    {{ item.additionalinfo }}
+                    <span v-html="item.additionalinfo"></span>
                   </td>
                   <td>
                     <div v-if="item === selectedItem">
@@ -143,7 +143,7 @@ export default {
           align: "center",
         },
         {
-          text: "تحویل گیرنده",
+          text: "صاحب جمع",
           value: "title",
           width: 150,
           align: "center",
@@ -163,7 +163,6 @@ export default {
         {
           text: 'اطلاعات تکمیلی',
           value: 'additionalinfo',
-          width: 150,
         },
         {
           text: "",
