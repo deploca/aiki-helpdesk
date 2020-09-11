@@ -174,8 +174,8 @@
                           <v-row>
                             <v-col>
                               <v-row
-                                  v-for="item in Asset.assetadditionalinfo"
-                                  :key="item.value"
+                                  v-for="(item, index) in Asset.assetadditionalinfo"
+                                  :key="index"
                               >
                                 <v-col>
                                   <span :class="'text-bold ml-3'">{{ item.label }}</span>
@@ -183,7 +183,7 @@
                                   <span>
                                                     <v-icon
                                                         color="red"
-                                                        @click="deleteAdditionalInfo(item)"
+                                                        @click="deleteAdditionalInfo(index)"
                                                     >
                                                       mdi-delete
                                                     </v-icon>
@@ -300,13 +300,8 @@ export default {
         this.$router.push("/AssetList");
       }
     },
-    deleteAdditionalInfo(item) {
-      let newItems = this.Asset.assetadditionalinfo.filter(function (
-          el
-      ) {
-        return el.label !== item.label;
-      });
-      this.Asset.assetadditionalinfo = newItems;
+    deleteAdditionalInfo(index) {
+      this.Asset.assetadditionalinfo.splice(index,1);
     },
     addAdditionalInfo() {
       if (this.label === '' || this.valueLabel === '') {
