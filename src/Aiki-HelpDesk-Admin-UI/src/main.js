@@ -23,6 +23,13 @@ import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import VueNativeNotification from 'vue-native-notification'
 import Splash from 'vue-splash';
+import * as Sentry from "@sentry/browser";
+import { Vue as VueIntegration } from "@sentry/integrations";
+
+Sentry.init({
+    dsn: "https://84d02cd132bc4864a55eb5013815c656@o301489.ingest.sentry.io/5426684",
+    integrations: [new VueIntegration({ Vue, attachProps: true })],
+});
 
 axois.defaults.baseURL = process.env.NODE_ENV == 'development' ? '/api' : '//webapi_' + window.location.host;
 axois.defaults.headers.common["Content-Type"] = "application/json";
