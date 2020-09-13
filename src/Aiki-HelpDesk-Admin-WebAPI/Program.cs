@@ -35,7 +35,11 @@ namespace AIKI.CO.HelpDesk.WebAPI
                     configApp.AddCommandLine(args);
                 })
                 .UseSerilog()
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseSentry();
+                });
         }
 
         public static void MigrateDatabase(IHost host)
